@@ -1,0 +1,9 @@
+{
+  "name": "real-time-crime-reporting",
+  "version": "1.0.0",
+  "description": "Real-time Crime Reporting application",
+  "scripts": {
+    "start": "npm start --prefix backend",
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend"
+  }
+}

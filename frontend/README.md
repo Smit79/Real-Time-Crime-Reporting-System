@@ -1,16 +1,78 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React and Vite client for the Real-Time Crime Reporting platform.
 
-Currently, two official plugins are available:
+## What It Does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Handles authentication and role-based navigation
+- Lets citizens report incidents and view their reports
+- Lets officers manage assigned reports
+- Lets admins monitor users, reports, and audit logs
+- Shows location-aware maps, alerts, and dashboard analytics
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- React Router DOM
+- Zustand
+- Framer Motion
+- Tailwind CSS
+- Leaflet and React Leaflet
+- React Hook Form
+- Zod
+- Axios
+- Socket.IO Client
+- Recharts
 
-## Expanding the ESLint configuration
+## Main User Flow
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```mermaid
+flowchart TD
+	A[Open app] --> B[Login or register]
+	B --> C[App hydrates session]
+	C --> D{User role}
+	D --> E[Citizen dashboard and reporting]
+	D --> F[Officer dashboard and report management]
+	D --> G[Admin dashboard and audit tools]
+	E --> H[Socket updates and alerts]
+	F --> H
+	G --> H
+```
+
+## Key Screens
+
+- Login, register, forgot password, and reset password
+- Citizen home, map, report crime, my reports, alerts, and profile
+- Officer dashboard and report management
+- Admin dashboard, users, reports, and audit logs
+
+## Environment Variables
+
+Create `frontend/.env` with:
+
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+VITE_SOCKET_URL=http://localhost:5000
+VITE_APP_NAME=CrimeWatch
+VITE_GOOGLE_MAPS_KEY=your_google_maps_key
+```
+
+## Run It
+
+```bash
+npm install
+npm run dev
+```
+
+## Scripts
+
+- `npm run dev`
+- `npm run build`
+- `npm run lint`
+- `npm run preview`
+
+## Notes
+
+- The client expects the backend API and Socket.IO server to be running.
+- Keep local environment files out of GitHub.

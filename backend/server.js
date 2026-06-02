@@ -1,5 +1,6 @@
 const express      = require('express');
 const http         = require('http');
+const path         = require('path');
 const cors         = require('cors');
 const helmet       = require('helmet');
 const morgan       = require('morgan');
@@ -14,6 +15,10 @@ const routes         = require('./routes/index');
 // ─── Init App ────────────────────────────────────────────────────────────────
 const app    = express();
 const server = http.createServer(app);
+
+// Trust proxy if we are behind a reverse proxy (e.g., Render, Heroku)
+app.set('trust proxy', 1);
+
 const allowedOrigins = Array.isArray(CLIENT_URLS) && CLIENT_URLS.length > 0
   ? CLIENT_URLS
   : ['http://localhost:3000', 'http://localhost:5173'];
@@ -88,13 +93,31 @@ app.get('/health', (req, res) => {
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use('/api/v1', routes);
 
-// ─── 404 Handler ──────────────────────────────────────────────────────────────
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: `Route ${req.originalUrl} not found`,
+// ─── Serve Frontend in Production ──────────────────────────────────────────────
+if (NODE_ENV === 'production') {
+  const frontendPath = path.join(__dirname, '..', 'frontend', 'dist');
+  app.use(express.static(frontendPath));
+
+  app.get('*', (req, res) => {
+    // Only serve index.html for non-API routes
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(frontendPath, 'index.html'));
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `Route ${req.originalUrl} not found`,
+      });
+    }
   });
-});
+} else {
+  // ─── 404 Handler for Dev ──────────────────────────────────────────────────────────────
+  app.use((req, res) => {
+    res.status(404).json({
+      success: false,
+      message: `Route ${req.originalUrl} not found`,
+    });
+  });
+}
 
 // ─── Global Error Handler ─────────────────────────────────────────────────────
 app.use(errorHandler);

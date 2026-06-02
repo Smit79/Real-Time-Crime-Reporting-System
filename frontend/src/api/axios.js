@@ -3,8 +3,10 @@ import toast from 'react-hot-toast';
 
 import { API_TIMEOUT_MS } from '../utils/constants';
 
+const baseURL = import.meta.env.VITE_API_URL || '/api/v1';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL,
   withCredentials: true,
   timeout: API_TIMEOUT_MS,
 });
@@ -78,7 +80,7 @@ api.interceptors.response.use(
 
       try {
         const refreshResponse = await axios.post(
-          `${import.meta.env.VITE_API_URL}/auth/refresh-token`,
+          `${baseURL}/auth/refresh-token`,
           {},
           { withCredentials: true, timeout: API_TIMEOUT_MS }
         );

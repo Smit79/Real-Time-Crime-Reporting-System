@@ -8,7 +8,7 @@ import useAuthStore from '../store/authStore';
 import useCrimeStore from '../store/crimeStore';
 import useNotificationStore from '../store/notificationStore';
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || window.location.origin;
 
 const useSocket = () => {
   const [isConnected, setIsConnected] = useState(false);
