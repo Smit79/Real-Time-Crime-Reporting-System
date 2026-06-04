@@ -12,6 +12,17 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     console.error('UI ErrorBoundary:', error, errorInfo);
+
+    // If it's a chunk load error (happens after new deployments when user has old tab open)
+    const isChunkLoadError = 
+      error?.name === 'ChunkLoadError' || 
+      error?.message?.includes('Failed to fetch dynamically imported module') ||
+      error?.message?.includes('Loading chunk');
+
+    if (isChunkLoadError) {
+      // Force a hard reload to get the new JavaScript chunks from the server
+      window.location.reload();
+    }
   }
 
   render() {
