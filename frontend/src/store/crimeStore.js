@@ -46,11 +46,25 @@ const useCrimeStore = create((set, get) => ({
     }
   },
 
-  fetchNearby: async (params = {}) => {
-    set({ isLoading: true });
+  fetchNearby: async ({ lat, lng, radius, crimeType, status, severity, startDate, endDate, page, limit }) => {
+    set({ isLoading: true, error: null });
     try {
-      const response = await crimeApi.getNearbyReports(params);
-      set({ nearbyReports: response?.data?.reports || [], isLoading: false });
+      const response = await crimeApi.getNearbyReports({
+        lat,
+        lng,
+        radius,
+        crimeType,
+        status,
+        severity,
+        startDate,
+        endDate,
+        page,
+        limit,
+      });
+      set({
+        nearbyReports: response.data.reports,
+        isLoading: false,
+      });
       return response;
     } catch (error) {
       set({ isLoading: false });

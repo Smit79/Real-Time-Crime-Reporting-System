@@ -91,6 +91,9 @@ const MapPage = () => {
         radius: debouncedFilters.radius,
         crimeType: debouncedFilters.crimeType || undefined,
         status: debouncedFilters.status || undefined,
+        severity: debouncedFilters.severityMin || undefined,
+        startDate: debouncedFilters.startDate || undefined,
+        endDate: debouncedFilters.endDate || undefined,
         page: 1,
         limit: 120,
       });

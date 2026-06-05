@@ -240,6 +240,9 @@ const getNearbyReports = asyncHandler(async (req, res, next) => {
     radius    = 5,          // km
     crimeType,
     status,
+    severity,
+    startDate,
+    endDate,
     limit     = 20,
     page      = 1,
   } = req.query;
@@ -267,8 +270,31 @@ const getNearbyReports = asyncHandler(async (req, res, next) => {
     },
   };
 
-  if (crimeType) filter.crimeType = crimeType;
-  if (status)    filter.status    = status;
+  const geoQuery = {};
+
+  if (crimeType) {
+    filter.crimeType = crimeType;
+    geoQuery.crimeType = crimeType;
+  }
+  if (status) {
+    filter.status = status;
+    geoQuery.status = status;
+  }
+  if (severity) {
+    filter.severity = { $gte: Number(severity) };
+    geoQuery.severity = { $gte: Number(severity) };
+  }
+  if (startDate || endDate) {
+    const dateFilter = {};
+    if (startDate) dateFilter.$gte = new Date(startDate);
+    if (endDate) {
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
+      dateFilter.$lte = end;
+    }
+    filter.createdAt = dateFilter;
+    geoQuery.createdAt = dateFilter;
+  }
 
   const skip  = (Number(page) - 1) * Number(limit);
   const total = await CrimeReport.countDocuments(filter);
@@ -284,8 +310,7 @@ const getNearbyReports = asyncHandler(async (req, res, next) => {
         distanceField:    'distanceInMeters',
         maxDistance:      radiusInKm * 1000,   // metres
         spherical:        true,
-        ...(crimeType && { query: { crimeType } }),
-        ...(status    && { query: { status } }),
+        query:            geoQuery,
       },
     },
     {
