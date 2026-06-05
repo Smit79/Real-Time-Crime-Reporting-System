@@ -20,8 +20,12 @@ class ErrorBoundary extends Component {
       error?.message?.includes('Loading chunk');
 
     if (isChunkLoadError) {
-      // Force a hard reload to get the new JavaScript chunks from the server
-      window.location.reload();
+      // Prevent infinite loops by checking if we already tried to auto-reload
+      if (!window.location.search.includes('chunk_retry=')) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('chunk_retry', Date.now().toString());
+        window.location.href = url.toString();
+      }
     }
   }
 
