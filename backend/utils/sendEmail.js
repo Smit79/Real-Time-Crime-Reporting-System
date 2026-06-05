@@ -24,6 +24,9 @@ const sendEmail = async ({ to, subject, html, text }) => {
     tls: {
       rejectUnauthorized: false,  // fix self-signed cert errors
     },
+    connectionTimeout: 5000,
+    greetingTimeout: 5000,
+    socketTimeout: 5000,
   });
 
   // Verify transporter connection
