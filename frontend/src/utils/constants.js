@@ -1,6 +1,6 @@
 export const APP_NAME = import.meta.env.VITE_APP_NAME || 'CrimeWatch';
 
-export const API_TIMEOUT_MS = 20000;
+export const API_TIMEOUT_MS = 60000;
 
 export const ROLE_HOME = {
   citizen: '/home',

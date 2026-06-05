@@ -54,7 +54,15 @@ const AppLayout = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
         >
-          <Outlet />
+          <Suspense
+            fallback={
+              <div className="grid h-full min-h-[50vh] place-items-center">
+                <LoadingSpinner label="Loading page..." />
+              </div>
+            }
+          >
+            <Outlet />
+          </Suspense>
         </motion.main>
       </div>
       <Footer />
