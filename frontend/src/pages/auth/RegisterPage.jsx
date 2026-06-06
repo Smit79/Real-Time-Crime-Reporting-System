@@ -18,8 +18,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <PageTransition className="flex min-h-screen flex-col bg-auth-pattern lg:grid lg:grid-cols-5">
-      <section className="relative flex flex-col justify-center overflow-hidden px-4 py-8 sm:px-6 sm:py-10 lg:col-span-3 lg:px-12 lg:py-16">
+    <PageTransition className="grid min-h-screen bg-auth-pattern lg:grid-cols-5">
+      <section className="relative overflow-hidden px-6 py-10 lg:col-span-3 lg:px-12 lg:py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(30,64,175,0.28),transparent_38%),radial-gradient(circle_at_70%_35%,rgba(15,118,110,0.2),transparent_35%)]" />
         <div className="relative z-10 max-w-xl">
           <p className="inline-flex rounded-full border border-secondary/20 bg-secondary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-secondary">
@@ -34,7 +34,7 @@ const RegisterPage = () => {
         </div>
       </section>
 
-      <section className="flex flex-1 items-center justify-center px-4 pb-12 pt-4 sm:px-6 sm:pb-10 lg:col-span-2 lg:px-10 lg:py-10">
+      <section className="flex items-center justify-center px-6 py-10 lg:col-span-2 lg:px-10">
         <motion.div
           initial={{ opacity: 0, x: 24 }}
           animate={{ opacity: 1, x: 0 }}

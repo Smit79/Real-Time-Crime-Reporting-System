@@ -14,8 +14,8 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <PageTransition className="flex min-h-screen flex-col bg-auth-pattern lg:grid lg:grid-cols-5">
-      <section className="relative flex flex-col justify-center overflow-hidden px-4 py-8 sm:px-6 sm:py-10 lg:col-span-3 lg:px-12 lg:py-16">
+    <PageTransition className="grid min-h-screen bg-auth-pattern lg:grid-cols-5">
+      <section className="relative overflow-hidden px-6 py-10 lg:col-span-3 lg:px-12 lg:py-16">
         <motion.div
           initial={{ opacity: 0, scale: 1.03 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -54,7 +54,7 @@ const LoginPage = () => {
             Collaborate with your city in real-time. Verified crime intelligence, instant alerts, and faster response.
           </p>
 
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ const LoginPage = () => {
         </div>
       </section>
 
-      <section className="flex flex-1 items-center justify-center px-4 pb-12 pt-4 sm:px-6 sm:pb-10 lg:col-span-2 lg:px-10 lg:py-10">
+      <section className="flex items-center justify-center px-6 py-10 lg:col-span-2 lg:px-10">
         <motion.div
           initial={{ opacity: 0, x: 24 }}
           animate={{ opacity: 1, x: 0 }}

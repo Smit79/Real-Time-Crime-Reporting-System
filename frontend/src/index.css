@@ -94,6 +94,12 @@
       linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.2));
   }
 
+  .dark .bg-auth-pattern {
+    background-image: radial-gradient(circle at 20% 10%, rgba(59, 130, 246, 0.1), transparent 30%),
+      radial-gradient(circle at 80% 90%, rgba(20, 184, 166, 0.1), transparent 32%),
+      linear-gradient(120deg, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.2));
+  }
+
   .shadow-soft {
     box-shadow: 0 10px 25px -15px rgba(2, 6, 23, 0.35);
   }
