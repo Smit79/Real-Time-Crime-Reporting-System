@@ -19,6 +19,12 @@
 
 <br/>
 
+### 🌐 Live Demo
+
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Visit%20App-DC2626?style=for-the-badge)](https://real-time-crime-reporting-system.vercel.app)
+
+<br/>
+
 [📖 Documentation](#-table-of-contents) · [🚀 Quick Start](#-quick-start) · [🗂 Structure](#-project-structure) · [📡 API Reference](#-api-reference) · [🤝 Contributing](#-contributing)
 
 </div>
