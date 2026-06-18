@@ -140,9 +140,7 @@ const LoginForm = () => {
         </AnimatePresence>
       </button>
 
-      <button type="button" className="btn-surface w-full" aria-label="Continue with Google">
-        Continue with Google
-      </button>
+
 
       <div className="flex items-center justify-between text-sm">
         <Link to="/forgot-password" className="font-medium text-primary hover:underline">
